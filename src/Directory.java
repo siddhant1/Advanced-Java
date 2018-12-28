@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 
@@ -15,8 +16,20 @@ class CustomerOperations{
 		System.out.println(customers);
 	}
 
-	public static void sortCustomers() {
-		Collections.sort(customers);
+	public static void sortCustomers(int sortMech) {
+//		Collections.sort(customers,new Comparator<Customer>() {
+//
+//			@Override
+//			public int compare(Customer o1, Customer o2) {
+//				return ((Integer)o1.getId()).compareTo(o2.getId());
+//			}
+//		});
+		if(sortMech==1) {
+			Collections.sort(customers,(first,second)->first.getCity().compareTo(second.getCity()));
+			getCustomers();
+		}else if(sortMech==2) {
+			Collections.sort(customers,(first,second)->first.getName().compareTo(second.getName()));
+		}
 	}
 	
 	public static String search(int id) {
@@ -26,7 +39,7 @@ class CustomerOperations{
 	
 }
 
-class Customer implements Comparable<Customer>{
+class Customer{
 	private int id;
 	private String name;
 	private String city;
@@ -35,14 +48,29 @@ class Customer implements Comparable<Customer>{
 		this.name = name;
 		this.city = city;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", city=" + city + "]";
 	}
-	@Override
-	public int compareTo(Customer o) {
-       return ((Integer)this.id).compareTo(o.id);
-	}
+	
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -61,9 +89,9 @@ class Customer implements Comparable<Customer>{
 		}
 		return true;
 	}
+	}
 	
 	
-}
 public class Directory {
 
 	public static void main(String[] args) {
@@ -86,7 +114,8 @@ public class Directory {
 			CustomerOperations.getCustomers();
 			break;
 		case 3:
-			CustomerOperations.sortCustomers();
+			CustomerOperations.sortCustomers(1);
+			break;
 		case 4:
 			int id1 = scanner.nextInt();
 			System.out.println(CustomerOperations.search(id1));
