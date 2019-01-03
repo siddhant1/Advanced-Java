@@ -17,19 +17,19 @@ class CustomerOperations{
 	}
 
 	public static void sortCustomers(int sortMech) {
-//		Collections.sort(customers,new Comparator<Customer>() {
-//
-//			@Override
-//			public int compare(Customer o1, Customer o2) {
-//				return ((Integer)o1.getId()).compareTo(o2.getId());
-//			}
-//		});
-		if(sortMech==1) {
-			Collections.sort(customers,(first,second)->first.getCity().compareTo(second.getCity()));
-			getCustomers();
-		}else if(sortMech==2) {
-			Collections.sort(customers,(first,second)->first.getName().compareTo(second.getName()));
-		}
+		Collections.sort(customers,new Comparator<Customer>() {
+
+			@Override
+			public int compare(Customer o1, Customer o2) {
+				return ((Integer)o1.getId()).compareTo(o2.getId());
+			}
+		});
+//		if(sortMech==1) {
+//			Collections.sort(customers,(first,second)->first.getCity().compareTo(second.getCity()));
+//			getCustomers();
+//		}else if(sortMech==2) {
+//			Collections.sort(customers,(first,second)->first.getName().compareTo(second.getName()));
+//		}
 	}
 	
 	public static String search(int id) {
@@ -70,8 +70,6 @@ class Customer{
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", city=" + city + "]";
 	}
-	
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -123,3 +121,5 @@ public class Directory {
 	  }
    }
 }
+
+
